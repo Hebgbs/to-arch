@@ -19,4 +19,4 @@ I am not responsible if this script soomehow corrupts / deletes your `/home` bec
 
 Patches / Pull Requests: Just make a PR and I'll test it. If it passes I'll commit it.
 
-I have no idea about what i am doing, so I will proobably have some friends contributing to this repository who know better than I about this script (and whether I should keep hssting it).
+I have no idea about what i am doing, so I will probably have some friends contributing to this repository who know better than I about this script (and whether I should keep hssting it).
