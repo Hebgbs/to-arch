@@ -1,0 +1,28 @@
+name: Continuous Deployment
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+jobs:
+  merge:
+    name: Make
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - name: Make script
+          run: make
+        - uses: actions/upload-artifact@v2
+          with:
+            name: script
+            path: ./to-arch.sh
+        - name: Release body
+          run: printf "Please chmod after download\nLook at README for more info about features.\nRun\n\`\`\`bash\nchmod 755 to-arch.sh\nbash to-arch.sh\n\`\`\`\nto run." > body.txt
+        - name: Upload the release
+          uses: softprops/action-gh-release@v1
+          with:
+            body_path: body.txt 
+            files: to-arch.sh
+          env:
+            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

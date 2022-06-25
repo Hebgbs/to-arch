@@ -1,0 +1,25 @@
+name: Continuous Integration
+on:
+  push:
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'GNUMakefile'
+  pull_request:
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'GNUMakefile'
+  workflow_dispatch:
+jobs:
+  merge:
+    name: Make
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - name: Make script
+          run: make
+        - uses: actions/upload-artifact@v2
+          with:
+            name: script
+            path: ./to-arch.sh

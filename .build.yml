@@ -1,0 +1,24 @@
+image: archlinux
+packages:
+  - sed
+  - make
+  - coreutils
+sources:
+  - https://git.sr.ht/~kskeigrshi/to-arch.sh
+secrets:
+  - cbd0a118-651a-41ac-afdf-b74da3e87af5
+artifacts:
+  - to-arch.sh/to-arch.sh
+  
+tasks:
+  - build: |
+      set +xe
+      cd to-arch.sh
+      make
+  - pushtogithub: |
+      set +xe
+      cd to-arch.sh
+      git switch master
+      git push -f https://$(cat ~/.github_token)@github.com/kskeigrshi/to-arch.sh.git
+      cd ..
+      shred -u .github_token
